@@ -20,6 +20,6 @@ int main () {
             max = tableaux[i + 1];
         }
     }
-    printf("La valeurs minimum dans le tableaux est: %d", max);
+    printf("La valeurs maximum dans le tableaux est: %d", max);
     return 0;
 }
