@@ -4,7 +4,7 @@
 
 struct lesContact {
     char nomContact[25];
-    int numeroTelephone;
+    char numeroTelephone[20];
     char adresseMail[30];
 };
 
@@ -13,12 +13,18 @@ int numeroContact=0;
 
 void Ajouter() {
     printf("\n");
-    int choix;
+    int choix, taille=0, max=0;;
     do {
         printf("Veuillez enter le nom du contact %d: ", numeroContact + 1);
-        scanf("%s", &contact[numeroContact].nomContact);
-        printf("Veuillez enter le numero du contact %d: ", numeroContact + 1);
-        scanf("%d", &contact[numeroContact].numeroTelephone);
+        scanf(" %[^\n]", &contact[numeroContact].nomContact);
+        do {
+            printf("Veuillez enter le numero du contact %d: ", numeroContact + 1);
+            scanf("%s", &contact[numeroContact].numeroTelephone);
+            taille = strlen(contact->numeroTelephone);
+            if (taille > 10) {
+                printf("veuillez entrer 10 numeros maximum\n");
+            }
+        } while (taille > 10);
         printf("Veuillez enter l'adresse email du contact %d: ", numeroContact + 1);
         scanf("%s", &contact[numeroContact].adresseMail);
         printf("\nVoulez vous enter un autre contact? 1 - Oui / 2 - Non: ");
@@ -37,11 +43,11 @@ void Modifier() {
         char contactModifier[25];
         int nonTrouver=0, i=0;
         printf("Veuillez enter le nom de contact: ");
-        scanf("%s", &contactModifier);
+        scanf(" %[^\n]", &contactModifier);
         for (i = 0; i < numeroContact; i++) {
         if (strcmp(contact[i].nomContact, contactModifier) == 0) {
                 printf("Veuillez enter le nouveau numero: ");
-                scanf("%d", &contact[i].numeroTelephone);
+                scanf("%s", &contact[i].numeroTelephone);
                 printf("Veuillez enter la nouvelle adresse e-mail: ");
                 scanf("%s", &contact[i].adresseMail);
                 nonTrouver = 1;
@@ -60,7 +66,7 @@ void Supprimer() {
         char contactSupprimer[25];
         int nonTrouver=0, i=0, j=0;
         printf("\nVeuillez enter le nom de contact: ");
-        scanf("%s", &contactSupprimer);
+        scanf(" %[^\n]", &contactSupprimer);
         for (i = 0; i < numeroContact; i++) {
         if (strcmp(contact[i].nomContact, contactSupprimer) == 0) {
                 for (j = i; j < numeroContact - 1; j++) {
@@ -82,7 +88,7 @@ void Afficher() {
     } else {
         int i;
         for (i = 0; i < numeroContact; i++) {
-            printf("\nContact ~ %d | Nom: %s | Numero: 0%d | E-mail: %s", i + 1, contact[i].nomContact, contact[i].numeroTelephone, contact[i].adresseMail);
+            printf("\nContact ~ %d | Nom: %s | Numero: %s | E-mail: %s", i + 1, contact[i].nomContact, contact[i].numeroTelephone, contact[i].adresseMail);
         }
         printf("\n\n");
     }
@@ -95,10 +101,10 @@ void Rechercher() {
         char contactChercher[25];
         int nonTrouver=0, i=0;
         printf("Veuillez enter le nom de contact: ");
-        scanf("%s", &contactChercher);
+        scanf(" %[^\n]", &contactChercher);
         for (i = 0; i < numeroContact; i++) {
         if (strcmp(contact[i].nomContact, contactChercher) == 0) {
-                printf("\nContact ~ %d | Nom: %s | Numero: 0%d | E-mail: %s", i + 1, contact[i].nomContact, contact[i].numeroTelephone, contact[i].adresseMail);
+                printf("\nContact ~ %d | Nom: %s | Numero: %s | E-mail: %s", i + 1, contact[i].nomContact, contact[i].numeroTelephone, contact[i].adresseMail);
                 nonTrouver = 1;
                 break;
             }
