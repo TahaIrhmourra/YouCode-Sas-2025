@@ -173,59 +173,215 @@ void AfficherParPoste() {
     printf("\n\n");
 }
 void Afficher() {
-    int i=0, choix=0;
-    do {
+    if (numeroJoueurs == 0) {
         printf("\n");
-        printf("1 - Afficher les joueurs par ordre alphabetique\n");
-        printf("2 - Afficher les joueurs par age\n");
-        printf("3 - Afficher les joueurs par poste\n\n");
-        printf("Veuillez choisissez une operation: ");
-        scanf("%d", &choix);
-    } while (choix < 1 || choix > 3);
-    switch (choix) {
-        case 1: AfficherParOrdreAlphabetique();
-        break;
-        case 2: AfficherParAge();
-        break;
-        case 3: AfficherParPoste();
-        break;
+        printf("Aucun Joueur dans la list");
+        printf("\n\n");
+    } else {
+        int i=0, choix=0;
+        do {
+            printf("\n");
+            printf("1 - Afficher les joueurs par ordre alphabetique\n");
+            printf("2 - Afficher les joueurs par age\n");
+            printf("3 - Afficher les joueurs par poste\n\n");
+            printf("Veuillez choisissez une operation: ");
+            scanf("%d", &choix);
+        } while (choix < 1 || choix > 3);
+        switch (choix) {
+            case 1: AfficherParOrdreAlphabetique();
+            break;
+            case 2: AfficherParAge();
+            break;
+            case 3: AfficherParPoste();
+            break;
+        }
     }
 }
 
 // Modifier
-void ModifierPoste() {}
-void ModifierAge() {}
-void ModifierNombreButs() {}
+void ModifierPoste() {
+    int idRechercher;
+    printf("\n");
+    printf("Veuillez enter le Identifiant de joueur: ");
+    scanf("%d", &idRechercher);
+    int i=0, choix;
+    for (i = 0; i < numeroJoueurs; i++) {
+        if (joueur[i].idUnique == idRechercher) {
+            printf("1 - gardien\n");
+            printf("2 - defenseur\n");
+            printf("3 - milieu\n");
+            printf("4 - attaquant\n");
+            printf("Veuillez choisisez le nouveau poste: ");
+            scanf("%d", &choix);
+            switch (choix) {
+                case 1: strcpy(joueur[i].posteJoueur, "Gardien");
+                break;
+                case 2: strcpy(joueur[i].posteJoueur, "Defenseur");
+                break;
+                case 3: strcpy(joueur[i].posteJoueur, "Milieu");
+                break;
+                case 4: strcpy(joueur[i].posteJoueur, "Attaquant");
+                break;
+            }
+        }
+    }
+}
+void ModifierAge() {
+    int idRechercher;
+    printf("\n");
+    printf("Veuillez enter le Identifiant de joueur: ");
+    scanf("%d", &idRechercher);
+    int i=0, choix;
+    for (i = 0; i < numeroJoueurs; i++) {
+        if (joueur[i].idUnique == idRechercher) {
+            int nvAge;
+            printf("Veuillez enter le nouveau age: ");
+            scanf("%d", &nvAge);
+            joueur[i].ageJoueur = nvAge;
+        }
+    }
+}
+void ModifierNombreButs() {
+    int idRechercher;
+    printf("\n");
+    printf("Veuillez enter le Identifiant de joueur: ");
+    scanf("%d", &idRechercher);
+    int i=0, choix;
+    for (i = 0; i < numeroJoueurs; i++) {
+        if (joueur[i].idUnique == idRechercher) {
+            int nvButs;
+            printf("Veuillez enter le nouveau nombre des buts: ");
+            scanf("%d", &nvButs);
+            joueur[i].numeroButs = nvButs;
+        }
+    }
+}
 void Modifier() {
-    int i=0, choix=0;
-    do {
+    if (numeroJoueurs == 0) {
         printf("\n");
-        printf("1 - Modifier le poste d'un joueur\n");
-        printf("2 - Modifier l'age d'un joueur\n");
-        printf("3 - Modifier le nombre de buts marques par un joueur\n\n");
-        printf("Veuillez choisissez une operation: ");
-        scanf("%d", &choix);
-    } while (choix < 1 || choix > 3);
-    switch (choix) {
-        case 1: ModifierPoste();
-        break;
-        case 2: ModifierAge();
-        break;
-        case 3: ModifierNombreButs();
-        break;
+        printf("Aucun Joueur dans la list");
+        printf("\n\n");
+    } else {
+        int i=0, choix=0;
+        do {
+            printf("\n");
+            printf("1 - Modifier le poste d'un joueur\n");
+            printf("2 - Modifier l'age d'un joueur\n");
+            printf("3 - Modifier le nombre de buts marques par un joueur\n\n");
+            printf("Veuillez choisissez une operation: ");
+            scanf("%d", &choix);
+        } while (choix < 1 || choix > 3);
+        switch (choix) {
+            case 1: ModifierPoste();
+            break;
+            case 2: ModifierAge();
+            break;
+            case 3: ModifierNombreButs();
+            break;
+        }
     }
 }
 
 //Supprimer
-void Supprimer() {}
+void Supprimer() {
+    if (numeroJoueurs == 0) {
+        printf("\n");
+        printf("Aucun Joueur dans la list");
+        printf("\n\n");
+    } else {
+        int idSupprimer;
+        printf("\n");
+        printf("Veuillez enter le Identifiant de joueur a supprimer: ");
+        scanf("%d", &idSupprimer);
+        int i=0;
+        for (i = 0; i < numeroJoueurs; i++) {
+            if (joueur[i].idUnique == idSupprimer) {
+                joueur[i] = joueur[i + 1];
+                numeroJoueurs--;
+            }
+        }
+    }
+}
 
 //Rechercher
-void RechercherId() {}
-void RechercherNom() {}
-void Rechercher() {}
+void RechercherId() {
+    int idRechercher;
+    printf("\n");
+    printf("Veuillez enter le Identifiant de joueur: ");
+    scanf("%d", &idRechercher);
+    int i=0;
+    for (i = 0; i < numeroJoueurs; i++) {
+        if (joueur[i].idUnique == idRechercher) {
+            printf("\nid: %d | nom: %s | prenom: %s | N maillot: %d | poste: %s | age: %d | N Buts: %d\n\n", joueur[i].idUnique, joueur[i].nom, joueur[i].prenom, joueur[i].numeroMaillot, joueur[i].posteJoueur, joueur[i].ageJoueur, joueur[i].numeroButs);
+        }
+    }
+}
+void RechercherNom() {
+    char nomRechercher[25];
+    printf("\n");
+    printf("Veuillez enter le Nom de joueur: ");
+    scanf("%s", nomRechercher);
+    int i=0;
+    for (i = 0; i < numeroJoueurs; i++) {
+        if (strcmp(joueur[i].nom, nomRechercher) == 0) {
+            printf("\nid: %d | nom: %s | prenom: %s | N maillot: %d | poste: %s | age: %d | N Buts: %d\n\n", joueur[i].idUnique, joueur[i].nom, joueur[i].prenom, joueur[i].numeroMaillot, joueur[i].posteJoueur, joueur[i].ageJoueur, joueur[i].numeroButs);
+        }
+    }
+}
+void Rechercher() {
+    if (numeroJoueurs == 0) {
+        printf("\n");
+        printf("Aucun Joueur dans la list");
+        printf("\n\n");
+    } else {
+        int i=0, choix=0;
+        do {
+            printf("\n");
+            printf("1 - Rechercher un joueur par Identifiant\n");
+            printf("2 - Rechercher un joueur par Nom\n\n");
+            printf("Veuillez choisissez une operation: ");
+            scanf("%d", &choix);
+        } while (choix < 1 || choix > 2);
+        switch (choix) {
+            case 1: RechercherId();
+            break;
+            case 2: RechercherNom();
+            break;
+        }
+    }
+
+}
 
 //Statistiques
-void Statistiques() {}
+void Statistiques() {
+    if (numeroJoueurs == 0) {
+        printf("\n");
+        printf("Aucun Joueur dans la list");
+        printf("\n\n");
+    } else {
+        printf("\n-- Statistiques --\n");
+        printf("\n");
+
+        //Buts
+        int plusMarque;
+        printf("Veuillez choisiser le nombre de but (Joueur plus marque): ");
+        scanf("%d", &plusMarque);
+        // Total Joueur
+        printf("\nLe nombre total de joueur dans l'equipe: %d\n", numeroJoueurs);
+        // Moyenne
+        int i, somme;
+        for (i = 0; i < numeroJoueurs; i++) {
+            somme += joueur[i].ageJoueur;
+        }
+        printf("La moyen de l'age des joueurs d'equipe: %d\n", somme / numeroJoueurs);
+        printf("\n");
+        // But plus marque:
+
+        // Meilleur buteur:
+
+        // plus jeune plus age
+    }
+}
 
 int main () {
     int choix=0;
@@ -247,12 +403,12 @@ int main () {
             break;
             case 3: Modifier();
             break;
-            //case 4: Supprimer();
-            //break;
+            case 4: Supprimer();
+            break;
             case 5: Rechercher();
             break;
-            //case 6: Statistiques();
-            //break;
+            case 6: Statistiques();
+            break;
         }
     } while ((choix < 1 || choix > 7) || choix != 7);
     return 0;
